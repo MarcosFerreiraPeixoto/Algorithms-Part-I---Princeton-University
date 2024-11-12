@@ -1,4 +1,4 @@
-class ResizingArrayQueueOfString():
+class ResizingArrayQueue():
     def __init__(self):
         self.s = [None]
         self.head = 0

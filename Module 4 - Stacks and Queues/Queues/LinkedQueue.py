@@ -3,7 +3,7 @@ class _Node():
         self.item: str = None
         self.next: _Node = None
 
-class QueueOfString():
+class LinkedQueue():
     def __init__(self):
         self.first = None
         self.last = None

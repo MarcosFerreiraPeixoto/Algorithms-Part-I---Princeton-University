@@ -3,7 +3,7 @@ class _Node():
         self.item: str = None
         self.next: _Node = None
 
-class LinkedStacksOfString():
+class LinkedStack():
     def __init__(self):
         self.first = None
         self.n = 0
@@ -28,3 +28,15 @@ class LinkedStacksOfString():
 
     def is_empty(self):
         return True if self.n == 0 else False
+        
+    def __iter__(self):
+        self._iter_index = self.n
+        return self
+
+    def __next__(self):
+        if self._iter_index >= 0:
+            item = self.s[self._iter_index]
+            self._iter_index += 1
+            return item
+        else:
+            raise StopIteration
