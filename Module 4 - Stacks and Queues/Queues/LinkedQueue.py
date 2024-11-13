@@ -36,3 +36,9 @@ class LinkedQueue():
 
     def is_empty(self):
         return True if self.n == 0 else False
+    
+    def __iter__(self):
+        current = self.first
+        while current is not None:
+            yield current.value
+            current = current.next

@@ -30,13 +30,7 @@ class LinkedStack():
         return True if self.n == 0 else False
         
     def __iter__(self):
-        self._iter_index = self.n
-        return self
-
-    def __next__(self):
-        if self._iter_index >= 0:
-            item = self.s[self._iter_index]
-            self._iter_index += 1
-            return item
-        else:
-            raise StopIteration
+        current = self.first
+        while current is not None:
+            yield current.value
+            current = current.next
