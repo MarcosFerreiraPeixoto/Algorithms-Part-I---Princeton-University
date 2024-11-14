@@ -1,5 +1,5 @@
 import unittest
-from WeightedQuickUnionWithPathCompressionUF import WeightedQuickUnionWithPathCompressionUF
+from UnionFind.WeightedQuickUnionWithPathCompressionUF import WeightedQuickUnionWithPathCompressionUF
 
 class TestWeightedQuickUnionWithPathCompressionUF(unittest.TestCase):
     def setUp(self):

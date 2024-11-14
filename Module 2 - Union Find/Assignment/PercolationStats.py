@@ -1,7 +1,7 @@
 import random
 import math
 import argparse
-from Percolation import Percolation
+from Assignment.Percolation import Percolation
 
 class PercolationStats():
     def __init__(self, n: int, trials: int):
