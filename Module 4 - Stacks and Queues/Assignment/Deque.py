@@ -40,7 +40,7 @@ class Deque():
 
     def remove_first(self):
         if self.is_empty():
-            raise ValueError("The Deque is empty!")
+            raise IndexError("The Deque is empty!")
         
         previous_first = self.first
 
@@ -57,7 +57,7 @@ class Deque():
 
     def remove_last(self):
         if self.is_empty():
-            raise ValueError("The Deque is empty!")
+            raise IndexError("The Deque is empty!")
         
         previous_last = self.last
         

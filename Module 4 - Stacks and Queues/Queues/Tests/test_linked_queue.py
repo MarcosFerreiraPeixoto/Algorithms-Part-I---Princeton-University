@@ -45,7 +45,7 @@ class TestLinkedQueue(unittest.TestCase):
         self.assertTrue(self.queue.is_empty())
 
     def test_underflow(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaises(IndexError):
             self.queue.dequeue()
 
 

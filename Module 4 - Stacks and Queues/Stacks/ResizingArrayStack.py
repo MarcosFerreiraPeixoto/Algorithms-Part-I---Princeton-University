@@ -20,7 +20,7 @@ class ResizingArrayStack():
 
     def pop(self):
         if self.is_empty():
-            raise ValueError("The list is empty!")
+            raise IndexError("The list is empty!")
         
         self.n -= 1
         item = self.s[self.n]

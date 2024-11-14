@@ -45,14 +45,14 @@ class TestFixedCapacityStack(unittest.TestCase):
     def test_overflow(self):
         for i in range(15):
             self.stack.push(f"item{i}")
-        with self.assertRaises(ValueError):
+        with self.assertRaises(IndexError):
             self.stack.push("overflow")
         
         for i in range(14, -1, -1):
             self.assertEqual(self.stack.pop(), f"item{i}")
 
     def test_underflow(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaises(IndexError):
             self.stack.pop()
 
 

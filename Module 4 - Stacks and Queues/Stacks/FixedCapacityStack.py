@@ -5,14 +5,14 @@ class FixedCapacityStack():
     
     def push(self, string):
         if self.n >= len(self.s):
-            raise ValueError("The Stack is full! Pop a value before pushing a new one.")
+            raise IndexError("The Stack is full! Pop a value before pushing a new one.")
         
         self.s[self.n] = string
         self.n += 1
 
     def pop(self):
         if self.is_empty():
-            raise ValueError("The list is empty!")
+            raise IndexError("The list is empty!")
         
         self.n -= 1
         item = self.s[self.n]

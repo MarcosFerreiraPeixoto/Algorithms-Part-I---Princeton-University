@@ -23,7 +23,7 @@ class ResizingArrayQueue():
 
     def dequeue(self):
         if self.is_empty():
-            raise ValueError("The queue is empty!")
+            raise IndexError("The queue is empty!")
         
         item = self.s[self.head]
         self.s[self.head] = None

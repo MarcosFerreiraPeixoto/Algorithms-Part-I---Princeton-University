@@ -18,7 +18,7 @@ class LinkedStack():
     
     def pop(self):
         if self.is_empty():
-            raise ValueError("The list is empty!")
+            raise IndexError("The list is empty!")
         
         item = self.first.item
         self.first = self.first.next

@@ -46,11 +46,11 @@ class TestRandomizedQueue(unittest.TestCase):
         self.assertEqual(self.queue.size(), 0)
 
     def test_underflow_dequeue(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaises(IndexError):
             self.queue.dequeue()
 
     def test_underflow_sample(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaises(IndexError):
             self.queue.sample()
     
     def test_iteration(self):

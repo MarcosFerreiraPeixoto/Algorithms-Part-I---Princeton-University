@@ -68,11 +68,11 @@ class TestDeque(unittest.TestCase):
         self.assertEqual(self.deque.size(), 0)
 
     def test_underflow_remove_first(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaises(IndexError):
             self.deque.remove_first()
 
     def test_underflow_remove_last(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaises(IndexError):
             self.deque.remove_last()
     
     def test_iteration(self):

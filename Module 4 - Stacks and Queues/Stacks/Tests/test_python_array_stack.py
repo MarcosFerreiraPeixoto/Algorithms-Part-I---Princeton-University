@@ -42,7 +42,7 @@ class TestArrayImplementationStack(unittest.TestCase):
         self.assertTrue(self.stack.is_empty())
 
     def test_underflow(self):
-        with self.assertRaises(ValueError):
+        with self.assertRaises(IndexError):
             self.stack.pop()
 
 
