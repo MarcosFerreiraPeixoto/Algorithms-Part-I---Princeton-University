@@ -1,6 +1,6 @@
 import unittest
 import time
-from Percolation import Percolation
+from Assignment.Percolation import Percolation
 
 class TestPercolation(unittest.TestCase):
     def test_initialization(self):

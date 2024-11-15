@@ -1,5 +1,5 @@
 import unittest
-from QuickFindUF import QuickFindUF
+from UnionFind.QuickFindUF import QuickFindUF
 
 class TestQuickFindUF(unittest.TestCase):
     def setUp(self):

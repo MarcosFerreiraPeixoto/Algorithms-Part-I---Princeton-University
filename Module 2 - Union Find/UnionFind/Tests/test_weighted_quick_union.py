@@ -1,5 +1,5 @@
 import unittest
-from WeightedQuickUnionUF import WeightedQuickUnionUF
+from UnionFind.WeightedQuickUnionUF import WeightedQuickUnionUF
 
 class TestWeightedQuickUnionUF(unittest.TestCase):
     def setUp(self):

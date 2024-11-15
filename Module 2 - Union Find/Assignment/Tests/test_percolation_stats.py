@@ -1,5 +1,5 @@
 import unittest
-from PercolationStats import PercolationStats  # Ensure PercolationStats is in the same directory or path
+from Assignment.PercolationStats import PercolationStats  # Ensure PercolationStats is in the same directory or path
 
 class TestPercolationStats(unittest.TestCase):
 
