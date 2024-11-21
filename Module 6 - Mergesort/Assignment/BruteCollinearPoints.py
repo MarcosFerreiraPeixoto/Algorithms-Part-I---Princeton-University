@@ -8,9 +8,12 @@ class BruteCollinearPoints():
         if points is None:
             raise ValueError("The input can't be None!")
         
+        if len(points) == 0:
+            raise ValueError("Input is empty!")
+
         for point in points:
             if not isinstance(point, Point):
-                TypeError(f"Invalid item: {point}! It must be an instance of Point!")
+                raise TypeError(f"Invalid item: {point}! It must be an instance of Point!")
 
         for i in range(len(points)):
             for j in range(i + 1, len(points)):

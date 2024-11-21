@@ -3,6 +3,12 @@ import matplotlib.pyplot as plt
 
 class Point():
     def __init__(self, x: int, y: int):
+        if not isinstance(x, int):
+            raise TypeError("The x value must be an int")
+
+        if not isinstance(y, int):
+            raise TypeError("The y value must be an int")
+
         self._x = x
         self._y = y
 
