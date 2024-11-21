@@ -1,17 +1,16 @@
 import unittest
 from Assignment.Point import Point
 from Assignment.LineSegment import LineSegment
-from Assignment.FastCollinearPoints import FastCollinearPoints
+from Assignment.BruteCollinearPoints import BruteCollinearPoints
 
-class TestFastCollinearPoints(unittest.TestCase):
+class TestBruteCollinearPoints(unittest.TestCase):
 
     def setUp(self):
         self.points_valid = [
             Point(0, 0),
             Point(1, 1),
             Point(2, 2),
-            Point(3, 3),
-            Point(4, 4),
+            Point(3, 3)
         ]
         self.points_non_collinear = [
             Point(0, 0),
@@ -30,20 +29,20 @@ class TestFastCollinearPoints(unittest.TestCase):
 
     def test_empty_input(self):
         with self.assertRaises(ValueError):
-            FastCollinearPoints(self.points_empty)
+            BruteCollinearPoints(self.points_empty)
 
     def test_single_point(self):
-        fast_collinear = FastCollinearPoints(self.points_single)
+        fast_collinear = BruteCollinearPoints(self.points_single)
         self.assertEqual(fast_collinear.number_of_segments(), 0)
         self.assertEqual(fast_collinear.segments(), [])
 
     def test_all_collinear_points(self):
-        fast_collinear = FastCollinearPoints(self.points_valid)
+        fast_collinear = BruteCollinearPoints(self.points_valid)
         self.assertEqual(fast_collinear.number_of_segments(), 1)
         self.assertEqual(len(fast_collinear.segments()), 1)
 
     def test_no_collinear_points(self):
-        fast_collinear = FastCollinearPoints(self.points_non_collinear)
+        fast_collinear = BruteCollinearPoints(self.points_non_collinear)
         self.assertEqual(fast_collinear.number_of_segments(), 0)
         self.assertEqual(fast_collinear.segments(), [])
 
@@ -53,30 +52,24 @@ class TestFastCollinearPoints(unittest.TestCase):
             Point(1, 1),
             Point(2, 2),
             Point(3, 3),
-            Point(4, 4),
             Point(0, 3),
             Point(1, 2),
         ]
-        fast_collinear = FastCollinearPoints(points)
+        fast_collinear = BruteCollinearPoints(points)
         self.assertEqual(fast_collinear.number_of_segments(), 1)
         self.assertEqual(len(fast_collinear.segments()), 1)
 
     def test_duplicate_points(self):
         with self.assertRaises(ValueError):
-            FastCollinearPoints(self.points_with_duplicates)
+            BruteCollinearPoints(self.points_with_duplicates)
 
     def test_invalid_input(self):
         with self.assertRaises(ValueError):
-            FastCollinearPoints(None)
+            BruteCollinearPoints(None)
         
         with self.assertRaises(TypeError):
-            FastCollinearPoints([None, Point(1, 2), Point(3, 4)])
+            BruteCollinearPoints([None, Point(1, 2), Point(3, 4)])
 
-    def test_large_input(self):
-        points = [Point(i, i) for i in range(100)]
-        fast_collinear = FastCollinearPoints(points)
-        self.assertEqual(fast_collinear.number_of_segments(), 1)
-        self.assertEqual(len(fast_collinear.segments()), 1)
 
 if __name__ == "__main__":
     unittest.main()

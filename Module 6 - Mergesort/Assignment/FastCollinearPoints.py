@@ -2,7 +2,7 @@ from Assignment.Point import Point
 from Assignment.LineSegment import LineSegment
 from Mergesort.Mergesort import Mergesort
 from typing import List
-
+import matplotlib.pyplot as plt
 
 class FastCollinearPoints():
     def __init__(self, points: List[Point]):
@@ -58,14 +58,6 @@ class FastCollinearPoints():
         
         if len(colinear_points_list_guess) >= 4:
             colinear_points.append(colinear_points_list_guess)
-        
-        print("--------------")
-        for ponto in sorted_points:
-            print(ponto)
-        print("===")
-        for lista in colinear_points:
-            for ponto in lista:
-                print(ponto)
 
         return colinear_points
 
@@ -95,3 +87,43 @@ class FastCollinearPoints():
 
     def segments(self) -> List[LineSegment]:
         return self._segments
+
+
+def main(filename):
+    # Read the points from a file
+    points = []
+    with open(filename, 'r') as file:
+        n = int(file.readline().strip())  # Read the number of points
+        for _ in range(n):
+            x, y = map(int, file.readline().strip().split())
+            points.append(Point(x, y))
+    
+    # Draw the points
+    plt.figure(figsize=(8, 8))
+    plt.xlim(0, 32768)
+    plt.ylim(0, 32768)
+    plt.gca().set_aspect('equal', adjustable='box')
+    plt.title("Point Drawing Example")
+    plt.xlabel("X-axis")
+    plt.ylabel("Y-axis")
+
+    for point in points:
+        plt.plot(point.x, point.y, 'o', color='black')  # Draw each point
+    
+    # Process the points and find line segments
+    collinear = FastCollinearPoints(points)
+
+    for segment in collinear.segments():
+        print(segment)  # Print the segment
+        segment.draw()
+    
+    # Display the result
+    plt.show()
+
+
+if __name__ == "__main__":
+    import sys
+    if len(sys.argv) < 2:
+        print("Usage: python main.py <input_file>")
+    else:
+        main(sys.argv[1])
