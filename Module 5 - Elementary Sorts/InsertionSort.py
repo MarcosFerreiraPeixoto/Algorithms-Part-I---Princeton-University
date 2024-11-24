@@ -1,4 +1,7 @@
 class InsertionSort():
+    def __init__(self, comparator=None):
+        self.comparator = comparator
+
     def sort(self, l):
         for i in range(len(l)):
             for j in range(i, 0, -1):
@@ -8,6 +11,8 @@ class InsertionSort():
                     break
 
     def _less(self, a, b):
+        if self.comparator:
+            return self.comparator(a, b) < 0
         return a < b
 
     def _exch(self, l, i, j):
