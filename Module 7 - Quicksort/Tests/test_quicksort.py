@@ -1,10 +1,10 @@
 import unittest
-from Quicksort import Quicksort
+from Quick import Quick
 
-class TestQuicksort(unittest.TestCase):
+class TestQuick(unittest.TestCase):
 
     def setUp(self):
-        self.sorter = Quicksort()
+        self.sorter = Quick()
 
     def test_empty_list(self):
         l = []

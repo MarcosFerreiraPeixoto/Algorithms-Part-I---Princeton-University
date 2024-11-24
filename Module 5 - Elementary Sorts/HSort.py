@@ -1,6 +1,7 @@
 class HSort():
-    def __init__(self, h):
+    def __init__(self, h, comparator=None):
         self.h = h
+        self.comparator = comparator
 
     def sort(self, l):
         for i in range(self.h, len(l)):
@@ -11,6 +12,8 @@ class HSort():
                     break
 
     def _less(self, a, b):
+        if self.comparator:
+            return self.comparator(a, b) < 0
         return a < b
 
     def _exch(self, l, i, j):

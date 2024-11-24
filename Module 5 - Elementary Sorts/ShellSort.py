@@ -1,4 +1,7 @@
 class ShellSort():
+    def __init__(self, comparator=None):
+        self.comparator = comparator
+
     def sort(self, l):
         h = 1
         while h < len(l)/3:
@@ -15,6 +18,8 @@ class ShellSort():
             h = (h - 1)//3
     
     def _less(self, a, b):
+        if self.comparator:
+            return self.comparator(a, b) < 0
         return a < b
 
     def _exch(self, l, i, j):

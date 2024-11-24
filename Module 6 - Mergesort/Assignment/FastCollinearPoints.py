@@ -65,13 +65,12 @@ class FastCollinearPoints():
         if len(points) < 4:
             return
 
-        sorter = Mergesort()
-
         for i in range(len(points)):
             p1 = points[i]
             
             points_to_sort = [p for p in points if p1.compare_to(p) != 0]
-            sorter.sort(points_to_sort, comparator=p1.slope_order())
+            sorter = Mergesort(p1.slope_order())
+            sorter.sort(points_to_sort)
             colinear_points_lists = self.find_colinear_points(p1, points_to_sort)
 
             if colinear_points_lists != []:
