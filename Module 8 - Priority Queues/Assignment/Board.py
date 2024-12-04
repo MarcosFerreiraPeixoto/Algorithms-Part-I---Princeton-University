@@ -1,10 +1,14 @@
 from typing import List
 from copy import deepcopy
 from random import choice
+from typing import Callable
 
 class Board():
-    def __init__(self, matrix: List[List[int]]):
+    def __init__(self, matrix: List[List[int]], moves=0):
         self._board = matrix
+        self._manhattan = None
+        self._hamming = None
+        self.moves = moves
         self.n = len(matrix)
         self._goal_board = self._generate_goal_board()
 
@@ -12,31 +16,33 @@ class Board():
         return self.n
     
     def hamming(self):
-        hamming = 0
+        if self._hamming is None:
+            self._hamming = 0
 
-        for i in range(self.n):
-            for j in range(self.n):
-                if self._board[i][j] != 0 and self._board[i][j] != self._goal_board[i][j]:
-                    hamming += 1
+            for i in range(self.n):
+                for j in range(self.n):
+                    if self._board[i][j] != 0 and self._board[i][j] != self._goal_board[i][j]:
+                        self._hamming += 1
 
-        return hamming
+        return self._hamming
     
     def manhattan(self):
-        manhattan = 0
+        if self._manhattan is None:
+            self._manhattan = 0
 
-        for i in range(self.n):
-            for j in range(self.n):
-                value = self._board[i][j]
-                expected_value = self._goal_board[i][j]
+            for i in range(self.n):
+                for j in range(self.n):
+                    value = self._board[i][j]
+                    expected_value = self._goal_board[i][j]
 
-                if value != 0 and value != expected_value:
-                    if expected_value != 0:
-                        diff = abs(value - expected_value)
-                    else:
-                        diff = abs(value - self.n**2)
-                    manhattan += diff//self.n + diff%self.n
+                    if value != 0 and value != expected_value:
+                        if expected_value != 0:
+                            diff = abs(value - expected_value)
+                        else:
+                            diff = abs(value - self.n**2)
+                        self._manhattan += diff//self.n + diff%self.n
 
-        return manhattan
+        return self._manhattan
 
     def is_goal(self):
         return self._board == self._goal_board
@@ -49,25 +55,25 @@ class Board():
             neighbor_matrix = deepcopy(self._board)
             neighbor_matrix[i][j], neighbor_matrix[i-1][j] = neighbor_matrix[i-1][j], neighbor_matrix[i][j]
 
-            neighbors.append(Board(neighbor_matrix))
+            neighbors.append(Board(neighbor_matrix, self.moves + 1))
 
         if i != (self.n - 1):
             neighbor_matrix = deepcopy(self._board)
             neighbor_matrix[i][j], neighbor_matrix[i+1][j] = neighbor_matrix[i+1][j], neighbor_matrix[i][j]
 
-            neighbors.append(Board(neighbor_matrix))
+            neighbors.append(Board(neighbor_matrix, self.moves + 1))
         
         if j != 0:
             neighbor_matrix = deepcopy(self._board)
             neighbor_matrix[i][j], neighbor_matrix[i][j-1] = neighbor_matrix[i][j-1], neighbor_matrix[i][j]
 
-            neighbors.append(Board(neighbor_matrix))
+            neighbors.append(Board(neighbor_matrix, self.moves + 1))
 
         if j != (self.n - 1):
             neighbor_matrix = deepcopy(self._board)
-            neighbor_matrix[i][j], neighbor_matrix[i][j+1] = neighbor_matrix[i][j + 1], neighbor_matrix[i][j]
+            neighbor_matrix[i][j], neighbor_matrix[i][j+1] = neighbor_matrix[i][j+1], neighbor_matrix[i][j]
 
-            neighbors.append(Board(neighbor_matrix))
+            neighbors.append(Board(neighbor_matrix, self.moves + 1))
         
         return neighbors
 
@@ -105,3 +111,15 @@ class Board():
         result = f"{self.n}\n"
         result += "\n".join(" ".join(map(str, row)) for row in self._board)
         return result
+
+class BoardComparator():
+    def __call__(self, b1: 'Board', b2: 'Board') -> int:
+        b1_manhattan_moves = b1.manhattan() + b1.moves
+        b2_manhattan_moves = b2.manhattan() + b2.moves
+        
+        if b1_manhattan_moves < b2_manhattan_moves:
+            return -1
+        elif b1_manhattan_moves == b2_manhattan_moves:
+            return 0
+        else:
+            return 1
