@@ -1,14 +1,14 @@
 from typing import List
 from copy import deepcopy
 from random import choice
-from typing import Callable
 
 class Board():
-    def __init__(self, matrix: List[List[int]], moves=0):
+    def __init__(self, matrix: List[List[int]], moves=0, previous_board=None):
         self._board = matrix
         self._manhattan = None
         self._hamming = None
         self.moves = moves
+        self.previous_board = previous_board
         self.n = len(matrix)
         self._goal_board = self._generate_goal_board()
 
@@ -55,25 +55,25 @@ class Board():
             neighbor_matrix = deepcopy(self._board)
             neighbor_matrix[i][j], neighbor_matrix[i-1][j] = neighbor_matrix[i-1][j], neighbor_matrix[i][j]
 
-            neighbors.append(Board(neighbor_matrix, self.moves + 1))
+            neighbors.append(Board(neighbor_matrix, self.moves + 1, self))
 
         if i != (self.n - 1):
             neighbor_matrix = deepcopy(self._board)
             neighbor_matrix[i][j], neighbor_matrix[i+1][j] = neighbor_matrix[i+1][j], neighbor_matrix[i][j]
 
-            neighbors.append(Board(neighbor_matrix, self.moves + 1))
+            neighbors.append(Board(neighbor_matrix, self.moves + 1, self))
         
         if j != 0:
             neighbor_matrix = deepcopy(self._board)
             neighbor_matrix[i][j], neighbor_matrix[i][j-1] = neighbor_matrix[i][j-1], neighbor_matrix[i][j]
 
-            neighbors.append(Board(neighbor_matrix, self.moves + 1))
+            neighbors.append(Board(neighbor_matrix, self.moves + 1, self))
 
         if j != (self.n - 1):
             neighbor_matrix = deepcopy(self._board)
             neighbor_matrix[i][j], neighbor_matrix[i][j+1] = neighbor_matrix[i][j+1], neighbor_matrix[i][j]
 
-            neighbors.append(Board(neighbor_matrix, self.moves + 1))
+            neighbors.append(Board(neighbor_matrix, self.moves + 1, self))
         
         return neighbors
 
